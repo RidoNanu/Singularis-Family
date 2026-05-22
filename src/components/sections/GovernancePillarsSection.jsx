@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/common/SectionHeading"
 import { Container } from "@/components/layout/Container"
 import { SectionShell } from "@/components/layout/SectionShell"
 import { governancePillars } from "@/data/home"
-import handshakeIllustration from "@/assets/images/Midjourney_  Detailed black and white illustration of two men shaking hands_.webp"
+import handshakeIllustration from "@/assets/images/midjourney-handshake.webp"
 
 export function GovernancePillarsSection() {
   return (
