@@ -1,0 +1,584 @@
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  body {
+    @apply min-h-screen bg-background font-sans text-foreground;
+    background-image:
+      radial-gradient(circle at 8% 0%, rgba(30, 55, 84, 0.08), transparent 26%),
+      radial-gradient(circle at 100% 10%, rgba(30, 55, 84, 0.045), transparent 22%),
+      linear-gradient(180deg, rgba(248, 250, 252, 0.92) 0%, rgba(255, 255, 255, 0) 18%);
+    background-size:
+      auto,
+      auto,
+      auto;
+    font-feature-settings: "ss01" 1, "cv03" 1, "cv04" 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.74), transparent 16%),
+      radial-gradient(circle at center, transparent 60%, rgba(30, 55, 84, 0.03) 100%);
+    z-index: 0;
+  }
+
+  a {
+    @apply transition-colors duration-300;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  ::selection {
+    background: rgba(30, 55, 84, 0.16);
+    color: #1e3754;
+  }
+
+  #root {
+    isolation: isolate;
+  }
+}
+
+@layer components {
+  .section-frame {
+    @apply mx-auto w-full max-w-[1440px] px-6 md:px-10 lg:px-14;
+  }
+
+  .section-padding {
+    /* Reduced vertical padding on mobile for tighter editorial rhythm */
+    @apply py-16 md:py-28 lg:py-36;
+  }
+
+  .section-anchor {
+    scroll-margin-top: 8rem;
+  }
+
+  .section-label {
+    @apply mb-6 inline-flex items-center gap-3 text-[0.74rem] font-semibold uppercase tracking-[0.26em] text-primary/68;
+  }
+
+  .section-label::before {
+    content: "";
+    @apply h-px w-8 bg-primary/26;
+  }
+
+  .editorial-heading {
+    @apply font-serif text-4xl leading-[0.95] tracking-[-0.04em] text-foreground sm:text-5xl md:text-6xl lg:text-7xl;
+  }
+
+  .body-copy {
+    @apply text-base leading-8 text-muted-foreground md:text-lg;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+
+  .nav-link {
+    @apply relative inline-flex items-center pb-1 text-[0.76rem] font-medium uppercase tracking-[0.16em] text-primary/66 transition-colors duration-300 hover:text-primary;
+  }
+
+  .nav-link-active {
+    @apply text-primary;
+  }
+
+  .fine-print {
+    @apply text-[0.72rem] uppercase tracking-[0.18em] text-primary/50;
+  }
+
+  /* ─── LEADERSHIP SECTION — CINEMATIC EDITORIAL ──────────────────────────── */
+
+  .leadership-shell {
+    /* Deep atmospheric background: soft navy-indigo gradient with textural depth */
+    background:
+      linear-gradient(
+        168deg,
+        rgba(248, 250, 252, 1) 0%,
+        rgba(238, 244, 250, 0.92) 35%,
+        rgba(228, 238, 248, 0.88) 60%,
+        rgba(215, 230, 245, 0.80) 100%
+      );
+    position: relative;
+    overflow: hidden;
+  }
+
+  .leadership-shell::before {
+    /* Large radial atmospheric vignette — cinematic depth */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(30, 55, 84, 0.055) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 8% 80%, rgba(30, 55, 84, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 92% 10%, rgba(30, 55, 84, 0.04) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .leadership-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: clamp(5rem, 9vw, 10rem) clamp(1.5rem, 5vw, 5.5rem);
+    padding-bottom: clamp(4rem, 8vw, 9rem);
+  }
+
+  /* ── Watermark number ── */
+  .leadership-watermark {
+    position: absolute;
+    top: clamp(2rem, 5vw, 5rem);
+    right: clamp(1.5rem, 5vw, 5.5rem);
+    font-family: var(--font-serif);
+    font-size: clamp(7rem, 15vw, 18rem);
+    font-weight: 300;
+    color: rgba(30, 55, 84, 0.04);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  /* ── Section header ── */
+  .leadership-header {
+    position: relative;
+    z-index: 2;
+    max-width: 52rem;
+    margin-bottom: clamp(4rem, 7vw, 8rem);
+  }
+
+  .leadership-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 6.5vw, 7.2rem);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    color: var(--foreground);
+    margin-top: 1.2rem;
+    text-wrap: balance;
+  }
+
+  .leadership-headline em {
+    font-style: italic;
+    color: rgba(30, 55, 84, 0.52);
+  }
+
+  .leadership-subline {
+    margin-top: 1.8rem;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    color: rgba(30, 55, 84, 0.52);
+    max-width: 34ch;
+  }
+
+  /* ── Cinematic composition stage ── */
+  .leadership-stage {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: 0 clamp(1.5rem, 3vw, 3.5rem);
+    min-height: clamp(480px, 65vw, 800px);
+  }
+
+  /* ── Portrait figures ── */
+  .leadership-figure {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Primary (Revathi) — taller, starts at top, emotionally anchored */
+  .leadership-figure--primary {
+    align-self: start;
+    margin-top: 0;
+  }
+
+  /* Secondary (Aravind) — slightly shorter, offset downward for editorial stagger */
+  .leadership-figure--secondary {
+    align-self: start;
+    margin-top: clamp(3rem, 7vw, 7rem);
+  }
+
+  .leadership-figure-enter {
+    /* Used as clip-path animation target */
+    overflow: hidden;
+  }
+
+  /* ── Portrait frame ── */
+  .leadership-portrait-frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    will-change: transform;
+  }
+
+  /* Restrained portrait sizing: reduces dominance on the stage */
+  .leadership-portrait-frame {
+    max-width: clamp(12rem, 26vw, 22rem);
+    margin: 0 auto;
+  }
+
+  .leadership-figure--primary .leadership-portrait-frame,
+  .leadership-figure--secondary .leadership-portrait-frame {
+    /* More compact, editorial crop */
+    aspect-ratio: 3 / 3.6;
+    border-radius: 0.35rem;
+  }
+
+  .leadership-portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.82) contrast(1.03);
+    transition: filter 0.6s ease, transform 0.9s ease;
+  }
+
+  .leadership-portrait-frame:hover .leadership-portrait-img {
+    filter: saturate(0.9) contrast(1.04);
+    transform: scale(1.015);
+  }
+
+  /* Atmospheric overlay — navy tint blend */
+  .leadership-portrait-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(30, 55, 84, 0.12) 0%,
+        rgba(30, 55, 84, 0.04) 40%,
+        transparent 70%
+      );
+    mix-blend-mode: multiply;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Bottom fade — blends portrait into background */
+  .leadership-portrait-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 38%;
+    background: linear-gradient(
+      to top,
+      rgba(233, 241, 248, 0.82) 0%,
+      rgba(238, 244, 250, 0.55) 35%,
+      transparent 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* ── Floating editorial identity label ── */
+  .leadership-label {
+    position: relative;
+    z-index: 3;
+    margin-top: 1.6rem;
+    padding: 0;
+  }
+
+  .leadership-label--left {
+    text-align: left;
+    padding-left: 0.1rem;
+  }
+
+  .leadership-label--right {
+    text-align: right;
+    padding-right: 0.1rem;
+  }
+
+  .leadership-label-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.45rem, 2.4vw, 2rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    line-height: 1.05;
+  }
+
+  .leadership-label-title {
+    margin-top: 0.45rem;
+    font-size: 0.67rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(30, 55, 84, 0.44);
+  }
+
+  /* Emotional statement — use serif for editorial tone */
+  .leadership-label-statement {
+    margin-top: 0.9rem;
+    font-family: var(--font-serif);
+    font-size: clamp(0.98rem, 1.6vw, 1.05rem);
+    line-height: 1.3;
+    color: rgba(30, 55, 84, 0.7);
+    max-width: 34ch;
+  }
+
+  /* Subtle See More cue — editorial, not a UI button */
+  .leadership-see-more {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: rgba(30,55,84,0.64);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: color 220ms ease, transform 220ms ease;
+  }
+
+  .leadership-see-more:hover {
+    color: rgba(30,55,84,0.9);
+    transform: translateY(-1px);
+  }
+
+  /* Expanded biography — use premium serif (same as homepage) for editorial tone */
+  .leadership-bio {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 1.4vw, 1.05rem);
+    line-height: 1.45;
+    color: rgba(30,55,84,0.72);
+    max-width: 44ch;
+    font-weight: 400;
+  }
+
+  .leadership-label--right .leadership-label-statement {
+    margin-left: auto;
+  }
+
+  /* ── Center editorial divider ── */
+  .leadership-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.8rem;
+    padding-top: clamp(3rem, 8vw, 9rem);
+    transform-origin: top center;
+  }
+
+  .leadership-divider-line {
+    width: 1px;
+    flex: 1;
+    min-height: clamp(3rem, 6vw, 7rem);
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(30, 55, 84, 0.22),
+      transparent
+    );
+  }
+
+  .leadership-divider-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(30, 55, 84, 0.35);
+    white-space: nowrap;
+    transform: rotate(180deg);
+    line-height: 1;
+  }
+
+  /* ── Bottom editorial footer line ── */
+  .leadership-footer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: clamp(4rem, 7vw, 8rem);
+    transform-origin: left center;
+  }
+
+  .leadership-footer-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(30, 55, 84, 0.18),
+      transparent
+    );
+  }
+
+  .leadership-footer-note {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(30, 55, 84, 0.38);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Mobile responsive ── */
+  @media (max-width: 767px) {
+    .section-padding {
+      @apply py-14;
+    }
+
+    .section-frame {
+      @apply px-4;
+    }
+
+    .editorial-heading {
+      @apply text-[2rem] leading-[0.98] tracking-[-0.04em];
+    }
+
+    .body-copy {
+      @apply text-[0.98rem] leading-7;
+    }
+
+    .fine-print {
+      @apply text-[0.66rem] tracking-[0.22em];
+    }
+
+    .leadership-stage {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      min-height: unset;
+      gap: 1.4rem;
+    }
+
+    .leadership-figure--secondary {
+      margin-top: 0;
+    }
+
+    .leadership-divider {
+      flex-direction: row;
+      padding-top: 0;
+      padding: 0.5rem 0;
+    }
+
+    .leadership-divider-line {
+      min-height: 1px;
+      width: auto;
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(30, 55, 84, 0.22),
+        transparent
+      );
+    }
+
+    .leadership-divider-text {
+      writing-mode: horizontal-tb;
+      transform: none;
+      font-size: 0.6rem;
+    }
+
+    .leadership-figure--primary .leadership-portrait-frame,
+    .leadership-figure--secondary .leadership-portrait-frame {
+      aspect-ratio: 3 / 3.5;
+      max-width: 100%;
+    }
+
+    .leadership-label--right {
+      text-align: left;
+    }
+
+    .leadership-label--right .leadership-label-statement {
+      margin-left: 0;
+    }
+
+    .leadership-footer {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+      margin-top: clamp(2rem, 4vw, 3rem);
+    }
+
+    .leadership-inner {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 2.5rem);
+      padding-bottom: clamp(2rem, 5vw, 3rem);
+    }
+
+    .leadership-footer-rule {
+      width: 100%;
+    }
+
+    .leadership-footer-note {
+      white-space: normal;
+      text-align: center;
+    }
+
+    .leadership-shell::before {
+      background:
+        radial-gradient(ellipse 72% 44% at 50% 16%, rgba(30, 55, 84, 0.04) 0%, transparent 72%),
+        radial-gradient(ellipse 36% 28% at 8% 84%, rgba(30, 55, 84, 0.035) 0%, transparent 64%),
+        radial-gradient(ellipse 32% 26% at 92% 10%, rgba(30, 55, 84, 0.03) 0%, transparent 60%);
+    }
+
+    .leadership-watermark {
+      opacity: 0.45;
+      font-size: clamp(5rem, 24vw, 8rem);
+      top: 1.25rem;
+      right: 0.75rem;
+    }
+
+    .leadership-headline {
+      font-size: clamp(2.25rem, 11vw, 3.8rem);
+      line-height: 0.96;
+      margin-top: 0.9rem;
+      max-width: 10ch;
+    }
+
+    .leadership-subline {
+      margin-top: 1.2rem;
+      max-width: 30ch;
+    }
+
+    .leadership-portrait-frame {
+      box-shadow: 0 16px 34px rgba(30, 55, 84, 0.08);
+    }
+
+    .leadership-label-name {
+      font-size: 1.22rem;
+    }
+
+    .leadership-label-statement,
+    .leadership-bio {
+      font-size: 0.95rem;
+      line-height: 1.58;
+      max-width: 100%;
+    }
+
+    .leadership-see-more {
+      font-size: 0.76rem;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
